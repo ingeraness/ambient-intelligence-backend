@@ -1,0 +1,22 @@
+{
+  "name": "ambient-intelligence-backend",
+  "version": "1.0.0",
+  "description": "ambient intelligence backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingeraness/ambient-intelligence-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ingeraness/ambient-intelligence-backend/issues"
+  },
+  "homepage": "https://github.com/ingeraness/ambient-intelligence-backend#readme",
+  "dependencies": {
+    "mongodb": "^4.4.1"
+  }
+}
