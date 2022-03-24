@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/ingeraness/ambient-intelligence-backend#readme",
   "dependencies": {
-    "mongodb": "^4.4.1"
-  }
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "module": "^1.2.5",
+    "mongodb": "^4.4.1",
+    "mongoose": "^6.2.8"
+  },
+  "type": "module"
 }

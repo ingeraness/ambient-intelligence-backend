@@ -1,7 +1,16 @@
+//import express from "express";
+//import cors from "cors";
+import { createRequire } from "module";
+import { createUser, getUsers } from "./models/userModel.js";
+const require = createRequire(import.meta.url);
+
 const { MongoClient } = require("mongodb");
 
+const express = require("express");
+const app = express();
+
 async function listDatabases(client) {
-  databasesList = await client.db().admin().listDatabases();
+  var databasesList = await client.db().admin().listDatabases();
 
   console.log("Databases:");
   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
@@ -27,3 +36,10 @@ async function main() {
 }
 
 main().catch(console.error);
+
+// The endpoints (routes)
+
+app.post("/user/create/", createUser);
+app.get("/user/get/", getUsers);
+
+app.listen(5000, () => console.log(`Listening on port ${5000}`));
