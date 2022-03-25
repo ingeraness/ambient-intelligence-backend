@@ -20,11 +20,13 @@ var UserModel = mongoose.model("UserModel", userSchema);
     .catch((err) => res.status(400).send(err));
 };*/
 
-export const getUsers = async (req, res) => {
+export const getUser = async (req, res) => {
   console.log("in get");
-  UserModel.find({ username: "test" })
+
+  const name = req.params;
+
+  UserModel.find({ username: name })
     .then((user) => res.status(200).send({ user }))
-    .then(() => console.log("HELLLOOO"))
     .catch((err) => res.status(400).send(err));
 };
 
@@ -37,6 +39,8 @@ export const createUser = async (req, res) => {
     role: req.body.role,
     preference: req.body.preference,
   });
+
+  console.log(newUser.name);
 
   newUser
     .save()
