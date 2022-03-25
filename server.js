@@ -1,17 +1,36 @@
 //import express from "express";
 //import cors from "cors";
 import { createRequire } from "module";
-import { createUser, getUser } from "./models/userModel.js";
-const require = createRequire(import.meta.url);
+import mongoose from "mongoose";
+import { createUser, getUser, getAllUsers } from "./models/userModel.js";
 
+const require = createRequire(import.meta.url);
+var cors = require("cors");
 const { MongoClient } = require("mongodb");
 
 var bodyParser = require("body-parser");
 
 const express = require("express");
-const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//const app = express();
+
+const uri =
+  "mongodb+srv://admin:admin123@amin.shtvc.mongodb.net/user?retryWrites=true&w=majority";
+
+mongoose.connect(uri, { useNewUrlParser: true }).then(() => {
+  const app = express();
+  app.use(express.json()); // new
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
+  app.use(cors());
+
+  app.post("/userDB/create", createUser);
+  app.get("/userDB/get/:name", getUser);
+  app.get("/userDB/getAll", getAllUsers);
+
+  app.listen(5000, () => {
+    console.log("Server has started!");
+  });
+});
 
 async function listDatabases(client) {
   var databasesList = await client.db().admin().listDatabases();
@@ -20,9 +39,8 @@ async function listDatabases(client) {
   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
 }
 
-async function main() {
-  const uri =
-    "mongodb+srv://admin:admin123@amin.shtvc.mongodb.net/user?retryWrites=true&w=majority";
+/*async function main() {
+  
 
   const client = new MongoClient(uri);
 
@@ -31,7 +49,7 @@ async function main() {
     await client.connect();
 
     //Make the appropriate DB calls
-    await listDatabases(client);
+    //await listDatabases(client);
   } catch (e) {
     console.error(e);
   } finally {
@@ -39,11 +57,8 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+main().catch(console.error);*/
 
 // The endpoints (routes)
 
-app.post("/user/create/", createUser);
-app.get("/user/get/:name", getUser);
-
-app.listen(5000, () => console.log(`Listening on port ${5000}`));
+//app.listen(5000, () => console.log(`Listening on port ${5000}`));
