@@ -23,23 +23,23 @@ mongoose.connect(uri, { useNewUrlParser: true }).then(() => {
   app.use(bodyParser.json());
   app.use(cors());
 
-  app.post("/userDB/create", createUser);
-  app.get("/userDB/get/:name", getUser);
-  app.get("/userDB/getAll", getAllUsers);
+  app.post("/user/userDB/create", createUser);
+  app.get("/user/userDB/get/:name", getUser);
+  app.get("/user/userDB/getAll", getAllUsers);
 
   app.listen(5000, () => {
     console.log("Server has started!");
   });
 });
 
-async function listDatabases(client) {
+/*async function listDatabases(client) {
   var databasesList = await client.db().admin().listDatabases();
 
   console.log("Databases:");
   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
 }
 
-/*async function main() {
+async function main() {
   
 
   const client = new MongoClient(uri);
