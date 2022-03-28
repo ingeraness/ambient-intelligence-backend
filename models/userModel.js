@@ -32,7 +32,7 @@ export const getUser = async (req, res) => {
   const name = req.params.name;
   console.log(name);
 
-  UserModel.find({ name: name })
+  UserModel.findOne({ name: name })
     .then((user) => res.status(200).send({ user }))
     .catch((err) => res.status(400).send(err));
 };
