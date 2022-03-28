@@ -21,15 +21,16 @@ var UserModel = mongoose.model("UserModel", userSchema);
 };*/
 
 export const getAllUsers = async (req, res) => {
-  console.log("Get all");
-  var oneUser = await UserModel.findOne();
-  console.log(oneUser);
+  //var oneUser = await UserModel.find();
+  //console.log(oneUser);
+  UserModel.find()
+    .then((user) => res.status(200).send(user))
+    .catch((err) => res.status(400).send(err));
 };
 
 export const getUser = async (req, res) => {
-  console.log("in get");
-
   const name = req.params.name;
+  console.log(name);
 
   UserModel.find({ name: name })
     .then((user) => res.status(200).send({ user }))
@@ -37,12 +38,7 @@ export const getUser = async (req, res) => {
 };
 
 export const createUser = async (req, res) => {
-  // create user
-  console.log("CREATING!!");
   var newUser = new UserModel(req.body);
-
-  console.log(newUser.name);
-  console.log(newUser.yearBorn);
 
   newUser
     .save()
