@@ -2,7 +2,12 @@
 //import cors from "cors";
 import { createRequire } from "module";
 import mongoose from "mongoose";
-import { createUser, getUser, getAllUsers } from "./models/userModel.js";
+import {
+  createUser,
+  getUser,
+  getAllUsers,
+  getUserIdByName,
+} from "./models/userModel.js";
 
 const require = createRequire(import.meta.url);
 var cors = require("cors");
@@ -26,6 +31,7 @@ mongoose.connect(uri, { useNewUrlParser: true }).then(() => {
   app.post("/user/userDB/create", createUser);
   app.get("/user/userDB/get/:name", getUser);
   app.get("/user/userDB/getAll", getAllUsers);
+  app.get("/user/userDB/getFaceID/:name", getUserIdByName);
 
   app.listen(5000, () => {
     console.log("Server has started!");

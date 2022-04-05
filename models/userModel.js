@@ -54,3 +54,12 @@ export const createUser = async (req, res) => {
     )
     .catch((err) => res.status(400).send({ success: false, message: err }));
 };
+
+export const getUserIdByName = async (req, res) => {
+  const name = req.params.name;
+  console.log(name);
+
+  UserModel.findOne({ name: name })
+    .then((user) => res.status(200).send(user.faceID))
+    .catch((err) => res.status(400).send(err));
+};
