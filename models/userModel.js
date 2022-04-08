@@ -12,19 +12,7 @@ var userSchema = Schema({
 
 var UserModel = mongoose.model("UserModel", userSchema);
 
-/*export const getUser = (req, res) => {
-  const { searchUsername } = req.params;
-
-  userModel
-    .find({ name: searchUsername })
-    .then((user) => res.status(200).send({ user }))
-    .catch((err) => res.status(400).send(err));
-};*/
-
 export const getAllUsers = async (req, res) => {
-  //var oneUser = await UserModel.find();
-  //console.log(oneUser);
-  console.log("IN GET ALL");
   UserModel.find()
     .then((user) => res.status(200).send(user))
     .catch((err) => res.status(400).send(err));
@@ -32,7 +20,6 @@ export const getAllUsers = async (req, res) => {
 
 export const getUser = async (req, res) => {
   const name = req.params.name;
-  console.log(name);
 
   UserModel.findOne({ name: name })
     .then((user) => res.status(200).send({ user }))
@@ -41,8 +28,6 @@ export const getUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
   var newUser = new UserModel(req.body);
-
-  console.log("TRYING TO CREATE");
 
   newUser
     .save()
@@ -57,7 +42,6 @@ export const createUser = async (req, res) => {
 
 export const getUserIdByName = async (req, res) => {
   const name = req.params.name;
-  console.log(name);
 
   UserModel.findOne({ name: name })
     .then((user) => res.status(200).send(user.faceID))
