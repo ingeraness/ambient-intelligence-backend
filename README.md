@@ -10,6 +10,8 @@ Project developed by [Benedicte Kaltoft Hansen](https://github.com/benedictekh),
 2. Install dependencies with `npm install`
 3. Run the backend with `npm start`
 
+The server is now running on your computer.
+
 ## The Frondtend of the Project
 
 The frontend and arduino server code of the project can be found [here](https://github.com/benedictekh/Ambient-Intelligence).
